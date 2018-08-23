@@ -29,6 +29,16 @@ datadir		= /var/lib/mysql
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
 
+character-set-server = utf8mb4
+
+max-connections = 512
+
+key-buffer-size = 32M
+thread-cache-size = 64
+query-cache-limit = 8M
+query-cache-size = 256M
+query-cache-type = ON
+sort-buffer-size = 32M
 
 log-error=mysql.err
 log_warnings = 2
@@ -47,11 +57,15 @@ binlog-row-image = minimal
 log-bin = mysql-bin
 binlog_cache_size = 32M
 max_binlog_cache_size = 64M
-max_binlog_size = 1G
-expire_logs_days = 7
+max_binlog_size = 64M
+expire_logs_days = 4
 relay-log-purge = 1
 sync_binlog = 0
 
 
 innodb_data_file_path = ibdata1:128M:autoextend
 innodb_file_per_table = 1
+
+log-bin-trust-function-creators=1
+
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
