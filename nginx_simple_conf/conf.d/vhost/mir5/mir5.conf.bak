@@ -1,0 +1,18 @@
+server {
+        listen 3080;
+        #listen 80;
+        server_name  www.mir5.com pay.mir5.com gm.mir5.com cp.03yx.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+        access_log logs/mir5_access.log main;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+	        return 403;
+        }
+        include mir5_fastcgi.conf;
+	#include deny/deny_sql.conf;
+        #include vhost/mir5/mir5_rewrite.conf;
+       }

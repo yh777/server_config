@@ -1,0 +1,57 @@
+# Copyright (c) 2014, 2016, Oracle and/or its affiliates. All rights reserved.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+#
+# The MySQL  Server configuration file.
+#
+# For explanations see
+# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
+
+[mysqld]
+pid-file	= /var/run/mysqld/mysqld.pid
+socket		= /var/run/mysqld/mysqld.sock
+datadir		= /var/lib/mysql
+#log-error	= /var/log/mysql/error.log
+# By default we only accept connections from localhost
+#bind-address	= 127.0.0.1
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+
+log-error=mysql.err
+log_warnings = 2
+slow-query-log 
+slow-query-log-file=slow.log
+long_query_time = 2
+log-queries-not-using-indexes = 1
+log_throttle_queries_not_using_indexes=10
+log-slow-admin-statements = 1
+log-slow-slave-statements = 0
+
+#binlog & replication
+server-id = 1
+binlog_format = ROW
+binlog-row-image = minimal
+log-bin = mysql-bin
+binlog_cache_size = 32M
+max_binlog_cache_size = 64M
+max_binlog_size = 1G
+expire_logs_days = 7
+relay-log-purge = 1
+sync_binlog = 0
+
+
+innodb_data_file_path = ibdata1:128M:autoextend
+innodb_file_per_table = 1

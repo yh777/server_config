@@ -1,0 +1,204 @@
+server {
+        listen 80;
+        listen 3080;
+        server_name  www.mir5.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+#        access_log logs/mir5_access.log main;
+        access_log logs/mir5_access.log alicdn;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+        include vhost/mir5/error_page.conf;
+}
+server {
+        listen 80;
+        listen 3080;
+        server_name  pay.mir5.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+#        access_log logs/mir5_pay_access.log main;
+        access_log logs/mir5_pay_access.log alicdn; 
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+        include vhost/mir5/error_page.conf;
+}
+
+server {
+        listen 80;
+        listen 3080;
+        server_name  paynotify.mir5.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+#        access_log logs/mir5_paynotify_access.log main;
+        access_log logs/mir5_paynotify_access.log alicdn;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql_for_pay.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+        include vhost/mir5/error_page.conf;
+}
+server {
+        listen 80;
+        listen 3080;
+        server_name member.mir5.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+#        access_log logs/mir5_member_access.log main;
+        access_log logs/mir5_member_access.log alicdn;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+        limit_req zone=one burst=10;
+}
+server {
+        listen 3080;
+        server_name  cp.mir5.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+        access_log logs/mir5_cp_access.log main;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+}
+server {
+	listen 80;
+        listen 3080;
+        server_name  cp-gm.mir5.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+        access_log logs/mir5_cp_gm_access.log main;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+}
+server {
+        listen 80;
+        listen 3080;
+        server_name  launcher.mir5.com;
+        set $host_dir /opt/web/mir5/app;
+        charset utf-8;
+#        access_log logs/mir5_launcher_access.log main;
+        access_log logs/mir5_launcher_access.log alicdn;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+}
+server {
+        listen 80;
+        listen 3080;
+        server_name  res.mir5.com;
+        set $host_dir /opt/web/mir5/res;
+        charset utf-8;
+#        access_log logs/mir5_res_access.log main;
+        access_log logs/mir5_res_access.log alicdn;
+        root $host_dir;
+        
+	location / {
+            index  index.html index.htm index.php;
+         }
+	include deny/deny_sql.conf;
+	include vhost/mir5/mir5_res.conf;
+}
+server {
+        listen 80;
+        listen 3080;
+        server_name  uploadres.mir5.com;
+        set $host_dir /opt/web/mir5/res;
+        charset utf-8;
+        access_log logs/mir5_uploadres_access.log main;
+        root $host_dir;
+
+        location / {
+            index  index.html index.htm index.php;
+         }
+        location /file/ {
+        	include mir5_fastcgi.conf;
+        }
+        include deny/deny_sql.conf;
+}
+
+server {
+        listen 3080; 
+        server_name  sciic.soonyo.com;
+        set $host_dir /opt/web/sciic/app;
+        charset utf-8;
+        access_log logs/mir5_sciic_access.log main;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         } 
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include mir5_fastcgi.conf;
+        include deny/deny_sql.conf;
+        include vhost/mir5/mir5_rewrite.conf;
+        include vhost/mir5/error_page.conf;
+       }
+server {
+        listen 80;
+        listen 3080;
+        server_name  1120.mir5.com;
+        set $host_dir /opt/web/mir5/res/project/zt/1120;
+        charset utf-8;
+        access_log logs/mir5_1120_access.log alicdn;
+#        access_log logs/mir5_1120_access.log main;
+        root $host_dir;
+        location / {
+            index  index.html index.htm index.php;
+         }
+        if ($request_uri ~* (.*)\.(rar|zip)$){
+                return 403;
+        }
+        include vhost/mir5/error_page.conf;
+       }
