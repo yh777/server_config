@@ -1,4 +1,3 @@
-# server_config
 官方容器的使用
 mysql
 文档:https://hub.docker.com/_/mysql/
